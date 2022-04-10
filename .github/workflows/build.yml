@@ -50,6 +50,8 @@ jobs:
       run: |
         REPO_ROOT=${{ github.workspace }}
         make BR2_EXTERNAL=${REPO_ROOT} -C buildroot O=${REPO_ROOT}/image_build/ orange_table_defconfig
+        cd ${REPO_ROOT}/image_build
+        make -j8
 
 
 
