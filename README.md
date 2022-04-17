@@ -37,3 +37,24 @@ cd images
 sudo tar -xavf rootfs.tar -C /mnt/orange_zero_rootfs/
 cd ..
 ```
+
+
+## TFTP:
+https://www.emcraft.com/som/stm32mp1/loading-linux-images-via-ethernet-and-tftp
+
+### U-Boot console TFTP boot
+```shell
+setenv serverip 192.168.0.126
+
+setenv ipaddr 192.168.0.116
+
+setenv ethaddr 02:42:3a:75:d5:04
+
+setenv image zImage
+
+setenv dtbimage sun8i-h2-plus-orangepi-zero.dtb
+
+setenv netboot 'tftp 0x42000000 ${image} && tftp 0x43000000 ${dtbimage} && run args && bootm 0x42000000'
+
+run netboot
+```
