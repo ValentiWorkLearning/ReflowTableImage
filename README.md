@@ -54,7 +54,10 @@ setenv image zImage
 
 setenv dtbimage sun8i-h2-plus-orangepi-zero.dtb
 
-setenv netboot 'tftp 0x42000000 ${image} && tftp 0x43000000 ${dtbimage} && run args && bootm 0x42000000'
+setenv bootargs console=${console} root=/dev/nfs rootfstype=nfs ip=dhcp nfsroot=192.168.0.126:/mnt/orange_zero_rootfs/
+
+
+setenv netboot 'tftp 0x42000000 ${image} && tftp 0x43000000 ${dtbimage} && run bootargs && bootm ${loadaddr} - ${fdt_addr_r}'
 
 run netboot
 ```
