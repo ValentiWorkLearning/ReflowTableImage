@@ -72,3 +72,7 @@ bootz ${kernel_addr_r} - ${fdt_addr_r}
 mount -o port=2049,nolock,proto=tcp 192.168.0.126:/mnt/hostname  /mnt/target_name
 
 Don't forget about the /etc/export file
+
+```shell
+/srv/nfs/ *(rw,no_subtree_check,sync,no_root_squash,no_all_squash)
+```
