@@ -48,16 +48,27 @@ setenv serverip 192.168.0.126
 
 setenv ipaddr 192.168.0.116
 
-setenv ethaddr 02:42:3a:75:d5:04
-
 setenv image zImage
 
 setenv dtbimage sun8i-h2-plus-orangepi-zero.dtb
 
-setenv bootargs console=${console} root=/dev/nfs rootfstype=nfs ip=dhcp nfsroot=192.168.0.126:/mnt/orange_zero_rootfs/
+setenv bootargs root=/dev/nfs rw nfsroot=${serverip}:/mnt/rootfs/,nfsvers=3,tcp ip=${ipaddr}:${serverip}::255.255.255.0::eth0:any::8.8.8.8:
 
-setenv netboot 'tftp ${kernel_addr_r} ${image} && tftp ${fdt_addr_r} ${dtbimage} && run bootargs && bootz ${kernel_addr_r} - ${fdt_addr_r}'
-
+setenv netboot 'tftp ${kernel_addr_r} ${image} && tftp ${fdt_addr_r} ${dtbimage} && bootz ${kernel_addr_r} - ${fdt_addr_r}'
 
 run netboot
 ```
+### Linux Kernel Doc
+https://www.kernel.org/doc/Documentation/filesystems/nfs/nfsroot.txt
+
+
+```shell
+setenv bootargs "root=/dev/nfs ro nfsroot=${serverip}:/srv/nfs/,nfsvers=3,tcp ip=${ipaddr}:${serverip}:10.0.200.1:255.255.255.0:kontron:eth0:any:10.0.200.1:8.8.8.8:";
+
+bootz ${kernel_addr_r} - ${fdt_addr_r}
+```
+
+## Mounting NFS
+mount -o port=2049,nolock,proto=tcp 192.168.0.126:/mnt/hostname  /mnt/target_name
+
+Don't forget about the /etc/export file
