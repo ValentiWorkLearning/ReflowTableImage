@@ -50,9 +50,11 @@ setenv ipaddr 192.168.0.116
 
 setenv image zImage
 
-setenv dtbimage sun8i-h2-plus-orangepi-zero.dtb
+setenv dtbimage open_oven_board.dtb
 
 setenv bootargs root=/dev/nfs rw nfsroot=${serverip}:/mnt/rootfs/,nfsvers=3,tcp ip=${ipaddr}:${serverip}::255.255.255.0::eth0:any::8.8.8.8:
+
+setenv fetch_devicetree  tftp ${fdt_addr_r} ${dtbimage} && tftp 0x44000000 maxim_thermocouple.dtb
 
 setenv netboot 'tftp ${kernel_addr_r} ${image} && tftp ${fdt_addr_r} ${dtbimage} && bootz ${kernel_addr_r} - ${fdt_addr_r}'
 
