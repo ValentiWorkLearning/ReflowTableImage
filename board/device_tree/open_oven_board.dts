@@ -211,11 +211,19 @@
 &spi1 {
 	status = "okay";
 
-        temp-sensor@1 {
-            compatible = "maxim,max6675";
-            reg = <0>;
-            spi-max-frequency = <4300000>;
-            spi-cpha;
-        };
+		temp-sensor@1 {
+			compatible = "maxim,max6675";
+			reg = <0>;
+			spi-max-frequency = <4300000>;
+			spi-cpha;
+		};
+};
+
+/ {
+	dallas_thermo{
+		compatible = "w1-gpio";
+		status = "okay";
+		gpios = <&pio 0 6 GPIO_ACTIVE_HIGH>;
+	};
 
 };
