@@ -78,3 +78,6 @@ Don't forget about the /etc/export file
 ```shell
 /srv/nfs/ *(rw,no_subtree_check,sync,no_root_squash,no_all_squash)
 ```
+
+## Flash image to the SD card:
+sudo dd if=image_build/images/sdcard.img of=/dev/sdb status=progress bs=4M
