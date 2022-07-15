@@ -80,4 +80,6 @@ Don't forget about the /etc/export file
 ```
 
 ## Flash image to the SD card:
+```shell
 sudo dd if=image_build/images/sdcard.img of=/dev/sdb status=progress bs=4M
+```
