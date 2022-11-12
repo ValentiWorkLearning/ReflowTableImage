@@ -1,0 +1,8 @@
+[Unit]
+Description=Test hello-world based service
+
+[Service]
+ExecStart=/usr/sbin/mounts/rootfs-custom-mount.sh
+
+[Install]
+WantedBy=multi-user.target
